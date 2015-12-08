@@ -37,7 +37,7 @@ class DigitPerceptron:
         self.num_counts = np.zeros(self.num_classes)
 
     def decay_alpha(self, t):
-        self.alpha = self.alpha / ( 0.25 * t)
+        self.alpha = 1 / t
 
     def train_decision(self, model):
         dot_products = [0]*self.num_classes
