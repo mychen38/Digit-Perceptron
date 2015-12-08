@@ -17,8 +17,8 @@ DATA_DIR = './data'
 class DigitPerceptron:
 
     def __init__(self):
-        logger.info('a/t')
-        self.epochs = 100
+        logger.info('2/1+t')
+        self.epochs = 80
         self.alpha = 1.0
         self.num_classes = 10
         self.col = 28
@@ -27,17 +27,16 @@ class DigitPerceptron:
         self.random_weights = True
 
         if (self.random_weights):
-            self.feature_weight_vectors = np.random.uniform(-1, 1, (self.num_classes, self.row, self.col))
+            self.feature_weight_vectors = np.random.uniform(-2, 2, (self.num_classes, self.row, self.col))
         else:
             self.feature_weight_vectors = np.zeros((self.num_classes, self.row, self.col))
 
         if (self.bias):
             self.bias_val = 1
             self.bias_weight = np.zeros(self.num_classes)
-        self.num_counts = np.zeros(self.num_classes)
 
     def decay_alpha(self, t):
-        self.alpha = 1 / t
+        self.alpha = 2 / (1 + t)
 
     def train_decision(self, model):
         dot_products = [0]*self.num_classes
