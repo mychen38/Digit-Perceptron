@@ -18,7 +18,7 @@ class DigitPerceptron:
 
     def __init__(self):
         logger.info('2/1+t')
-        self.epochs = 80
+        self.epochs = 70
         self.alpha = 1.0
         self.num_classes = 10
         self.col = 28
@@ -175,6 +175,8 @@ class DigitPerceptron:
         accuracy = calc_accuracy(truths, predictions)
         logger.info('NB model is {0:.2f}% accurate on the digit data'.format(accuracy))
 
+        X = np.array(range(self.col))
+        Y = np.fliplr(np.atleast_2d(np.array(range(self.row))))[0]
         if info:
             confm = confusion_matrix(truths, predictions, self.num_classes)
             class_accuracies = [confm[n][n] for n in range(self.num_classes)]
@@ -191,12 +193,12 @@ class DigitPerceptron:
             plt.xlabel('Predictions')
             plt.ylabel('Truths')
 
+            X, Y = np.meshgrid(range(self.col), range(self.row))
+            Y = Y[::-1]
             for i in range(self.num_classes):
                 hf = plt.figure()
                 ha = hf.gca(projection = '3d')
 
-                X, Y = np.meshgrid(range(self.col), range(self.row))
-                Y.reverse()
                 ha.plot_surface(X, Y, self.feature_weight_vectors[i], rstride=1, cstride=1,
                                 linewidth=0, cmap=cm.coolwarm, antialiased = False)
                 ha.set_xlabel('X')
