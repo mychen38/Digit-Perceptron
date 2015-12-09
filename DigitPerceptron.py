@@ -18,7 +18,7 @@ class DigitPerceptron:
 
     def __init__(self):
         logger.info('2/1+t')
-        self.epochs = 70
+        self.epochs = 20
         self.alpha = 1.0
         self.num_classes = 10
         self.col = 28
@@ -36,7 +36,7 @@ class DigitPerceptron:
             self.bias_weight = np.zeros(self.num_classes)
 
     def decay_alpha(self, t):
-        self.alpha = 2 / (1 + t)
+        self.alpha = self.alpha / t
 
     def train_decision(self, model):
         dot_products = [0]*self.num_classes
